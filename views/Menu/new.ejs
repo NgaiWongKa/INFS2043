@@ -1,0 +1,16 @@
+<h1>Add New Menu Item</h1>
+<form action="/menu" method="POST">
+    <label for="name">Name</label>
+    <input type="text" name="menuItem[name]" id="name" required>
+    
+    <label for="description">Description</label>
+    <textarea name="menuItem[description]" id="description" required></textarea>
+    
+    <label for="price">Price</label>
+    <input type="number" name="menuItem[price]" id="price" required>
+    
+    <label for="category">Category</label>
+    <input type="text" name="menuItem[category]" id="category" required>
+    
+    <button type="submit">Add Item</button>
+</form>

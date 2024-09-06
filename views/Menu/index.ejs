@@ -1,0 +1,52 @@
+<h1>Menu</h1>
+<a href="/home">Home</a>
+<% if (currentUser.type == "staff") { %>
+<a href="/menu/new">Add New Item</a>
+<% } %>
+<ul>
+    <% menuItems.forEach(item => { %>
+        <li>
+            <h3><%= item.name %></h3>
+            <p><%= item.description %></p>
+            <p>Price: $<%= item.price.toFixed(2) %></p>
+            <form class="add-to-cart-form" data-id="<%= item._id %>">
+                <label for="quantity">Quantity:</label>
+                <input type="number" name="quantity" value="1" min="1">
+                <button type="submit">Add to Cart</button>
+            </form>
+            <% if (currentUser.type == "staff") { %>
+            <a href="/menu/<%= item._id %>/edit">Edit</a>
+            <form action="/menu/<%= item._id %>?_method=DELETE" method="POST" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        <% } %>
+        </li>
+    <% }); %>
+</ul>
+
+<a href="/cart" class="btn btn-primary">View Cart</a>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.add-to-cart-form').on('submit', function(e) {
+            e.preventDefault();
+
+            var form = $(this);
+            var itemId = form.data('id');
+            var quantity = form.find('input[name="quantity"]').val();
+
+            $.ajax({
+                url: '/cart/add/' + itemId,
+                type: 'POST',
+                data: { quantity: quantity },
+                success: function(response) {
+                    alert('Item added to cart!');
+                },
+                error: function(error) {
+                    alert('Error adding item to cart.');
+                }
+            });
+        });
+    });
+</script>

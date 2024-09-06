@@ -1,0 +1,16 @@
+<h1>Edit Menu Item</h1>
+<form action="/menu/<%= menuItem._id %>?_method=PUT" method="POST">
+    <label for="name">Name</label>
+    <input type="text" name="menuItem[name]" id="name" value="<%= menuItem.name %>">
+    
+    <label for="description">Description</label>
+    <textarea name="menuItem[description]" id="description"><%= menuItem.description %></textarea>
+    
+    <label for="price">Price</label>
+    <input type="number" name="menuItem[price]" id="price" value="<%= menuItem.price %>">
+    
+    <label for="category">Category</label>
+    <input type="text" name="menuItem[category]" id="category" value="<%= menuItem.category %>">
+    
+    <button type="submit">Update Item</button>
+</form>

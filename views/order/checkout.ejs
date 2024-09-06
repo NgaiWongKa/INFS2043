@@ -1,0 +1,17 @@
+<h1>Checkout</h1>
+
+<% if (cart.length > 0) { %>
+    <ul>
+        <% cart.forEach(function(item) { %>
+            <li>
+                <%= item.name %> - $<%= item.price %> x <%= item.quantity %> = $<%= item.price * item.quantity %>
+            </li>
+        <% }); %>
+    </ul>
+
+    <form action="/order" method="POST">
+        <button type="submit" class="btn btn-success">Place Order</button>
+    </form>
+<% } else { %>
+    <p>Your cart is empty. <a href="/menu">Go back to menu</a></p>
+<% } %>

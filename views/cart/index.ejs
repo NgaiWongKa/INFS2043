@@ -1,0 +1,17 @@
+<h1>Your Cart</h1>
+
+<ul>
+    <% cart.forEach(function(cartItem) { %>
+        <li>
+            <h3><%= cartItem.name %></h3>
+            <p>Price: $<%= cartItem.price.toFixed(2) %></p>
+            <p>Quantity: <%= cartItem.quantity %></p>
+            <p>Total: $<%= (cartItem.price * cartItem.quantity).toFixed(2) %></p>
+        </li>
+    <% }) %>
+</ul>
+
+<h2>Total Amount: $<%= cart.reduce((total, cartItem) => total + (cartItem.price * cartItem.quantity), 0).toFixed(2) %></h2>
+
+<a href="/menu">Back to menu</a>
+<a href="/order">Proceed to Checkout</a>
