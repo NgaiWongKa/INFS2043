@@ -26,6 +26,7 @@ app.use(require("express-session")({
 }));
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
+app.use(express.static('./assets'));
 
 app.use(passport.initialize());
 app.use(passport.session());
