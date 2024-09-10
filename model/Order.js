@@ -3,13 +3,11 @@ const mongoose = require('mongoose');
 const OrderSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        userName: String,
         ref: 'User'  // Reference to the User model
     },
     items: [{
         item: {
             type: mongoose.Schema.Types.ObjectId,
-            itemName: String,
             ref: 'MenuItem'  // Reference to the MenuItem model
         },
         quantity: Number
