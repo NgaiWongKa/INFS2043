@@ -22,7 +22,7 @@ app.use(require("express-session")({
     secret: "123456",
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 60000}
+    cookie: { maxAge: 40000000}
 }));
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
