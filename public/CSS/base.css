@@ -36,7 +36,7 @@ body {
   font-family: "Open Sans", sans-serif;
   letter-spacing: 0px;
   text-align: left;
-  color: var(--bgbody);
+  /* color: var(--bgbody); */
   background-color: var(--bgbody);
 }
 
