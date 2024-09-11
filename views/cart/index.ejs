@@ -6,7 +6,7 @@
             <h3><%= cartItem.name %></h3>
             <p>Price: $<%= cartItem.price.toFixed(2) %></p>
             <p>Quantity: <%= cartItem.quantity %></p>
-            <p>Total: $<%= (cartItem.price * cartItem.quantity).toFixed(2) %></p>
+            <p>Total: $<%= ((cartItem.price - (cartItem.promo_percentage / 100 * cartItem.price)) * cartItem.quantity).toFixed(2) %></p>
         </li>
     <% }) %>
 </ul>
