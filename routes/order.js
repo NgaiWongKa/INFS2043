@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
         return res.redirect("/menu");
     }
 
-    const totalAmount = cart.reduce((total, cartItem) => total + (cartItem.price * cartItem.quantity), 0);
+    const totalAmount = cart.reduce((total, cartItem) => total + (cartItem.price - (cartItem.price * cartItem.promo_percentage / 100) * cartItem.quantity), 0);
 
     const newOrder = new Order({
         user: req.user._id,
