@@ -97,7 +97,10 @@
                                     <li class="list-group-item d-flex justify-content-between align-items-start">
                                         <div class="ms-2 me-auto">
                                         <div class="fw-bold"><%= item.name %></div>
-                                        <b>Price per item: </b>$<%= item.price %> x <b>Quantity: </b><%= item.quantity %><b> Discount <%= item.promo_percentage %>%</b>
+                                        <b>Price per item: </b>$<%= item.price %> x <b>Quantity: </b><%= item.quantity %>
+                                        <% if (item.promo_percentage > 0) { %>
+                                            <b> Discount <%= item.promo_percentage %>%</b>
+                                        <% } %>
                                         </div>
                                         <span class="badge bg-secondary rounded-pill fw-bold">$<%= ((item.price - (item.promo_percentage / 100 * item.price)) * item.quantity).toFixed(2) %></span>
                                     </li>
