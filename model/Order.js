@@ -10,6 +10,7 @@ const OrderSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'MenuItem'  // Reference to the MenuItem model
         },
+        itemName: String,
         quantity: Number
     }],
     totalAmount: Number,

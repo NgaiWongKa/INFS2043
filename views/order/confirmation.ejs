@@ -4,10 +4,10 @@
 
 <ul>
     <% order.items.forEach(function(item) { %>
-        <li><%= item.name %> - Quantity: <%= item.quantity %></li>
+        <li><%= item.itemName %> - Quantity: <%= item.quantity %></li>
     <% }); %>
 </ul>
 
-<p>Total Amount: $<%= order.totalAmount %></p>
+<p>Total Amount: $<%= order.totalAmount.toFixed(2) %></p>
 
 <a href="/menu" class="btn btn-primary">Back to Menu</a>

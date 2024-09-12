@@ -4,14 +4,43 @@
     <ul>
         <% cart.forEach(function(item) { %>
             <li>
-                <%= item.name %> - $<%= item.price %> x <%= item.quantity %> = $<%= item.price * item.quantity %>
+                <%= item.name %> - $<%= item.price %> x <%= item.quantity %> ( <%= item.promo_percentage %>% discount ) = $<%= ((item.price - (item.promo_percentage / 100 * item.price)) * item.quantity).toFixed(2) %>
             </li>
         <% }); %>
     </ul>
 
     <form action="/order" method="POST">
+        <h3>Select Payment Method</h3>
+        <div>
+            <input type="radio" id="paymentCash" name="paymentMethod" value="cash" checked>
+            <label for="paymentCash">Cash</label>
+        </div>
+        <div>
+            <input type="radio" id="paymentCard" name="paymentMethod" value="card">
+            <label for="paymentCard">Card</label>
+        </div>
+
+        <div id="cardDetails" style="display: none;">
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" placeholder="Enter CVV">
+        </div>
+
         <button type="submit" class="btn btn-success">Place Order</button>
     </form>
+
+    <script>
+        document.querySelectorAll('input[name="paymentMethod"]').forEach((elem) => {
+            elem.addEventListener('change', function(event) {
+                const cardDetails = document.getElementById('cardDetails');
+                if (event.target.value === 'card') {
+                    cardDetails.style.display = 'block';
+                } else {
+                    cardDetails.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
 <% } else { %>
     <p>Your cart is empty. <a href="/menu">Go back to menu</a></p>
 <% } %>

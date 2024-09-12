@@ -9,12 +9,20 @@ router.post("/add/:id", async (req, res) => {
 
         if (item && quantity > 0) {
             req.session.cart = req.session.cart || [];
-            req.session.cart.push({
-                item: item._id,
-                name: item.name,
-                price: item.price,
-                quantity: quantity
-            });
+
+            const cartItem = req.session.cart.find(cartItem => cartItem.item.toString() === item._id.toString());
+
+            if (cartItem) {
+                cartItem.quantity += quantity;
+            } else {
+                req.session.cart.push({
+                    item: item._id,
+                    name: item.name,
+                    price: item.price,
+                    quantity: quantity,
+                    promo_percentage: item.promo_percentage
+                });
+            }
 
             res.json({ message: "Item added to cart", cart: req.session.cart });
         } else {

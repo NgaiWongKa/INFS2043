@@ -27,6 +27,21 @@ var User = new Schema({
     },
     prefFuel: {
         type: String
+    },
+    paymentMethod: {
+        type: String
+    },
+    cardNumber: {
+        type: String
+    },
+    CVV: {
+        type: String
+    },
+    expirationMonth: {
+        type: String
+    },
+    expirationYear: {
+        type: String
     }
 })
 

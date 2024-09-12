@@ -58,8 +58,8 @@
                   <a class="item" href="/menu"><span>Menu</span></a>
                   <a class="item" href="/profile"><span>Profile</span></a>
                   <a class="item" href="/logout"><span>Log out</span></a>
-                  <a class="item"><span>Balance: <%= currentUser.balance %></span></a>
                 <% } %>
+                <a class="item" href="/GPS"><span>GPS</span></a>
               </div>
               <div class="mobile-btn" onclick="showMenu()">
                 <i id="btn-open" class="fa fa-bars" aria-hidden="true"></i>
@@ -74,6 +74,7 @@
               <a class="item" href="/login">Login</a>
               <a class="item" href="/register">Register</a>
               <a class="item" href="/menu">Menu</a>
+              <a class="item" href="/GPS">GPS</a>
             </nav>
           </section>
     
@@ -86,11 +87,13 @@
                 <p>
                   Welcome to UTR
                 </p>
+                <% if (!isAuthenticated) { %>
                 <div class="btn_menu">
                   <a id="viewmenu" href="/login" target="_blank"
                     >LOGIN</a
                   >
                 </div>
+                <% } %>
               </ul>
             </div>
             <!-- slide1 -->
@@ -101,11 +104,13 @@
                 <p>
                   Welcome to UTR
                 </p>
+                <% if (!isAuthenticated) { %>
                 <div class="btn_menu">
                   <a id="viewmenu" href="/login" target="_blank"
                     >LOGIN</a
                   >
                 </div>
+                <% } %>
               </ul>
             </div>
             <!-- slide2 -->
@@ -113,14 +118,16 @@
               <!-- <img src="./images/bg3.png" alt=""> -->
               <ul class="menu-container">
                 <h5>UTR</h5>
-                <p>
+                <p> 
                   Welcome to UTR
                 </p>
+                <% if (!isAuthenticated) { %>
                 <div class="btn_menu">
                   <a id="viewmenu" href="/login" target="_blank"
                     >LOGIN</a
                   >
                 </div>
+                <% } %>
               </ul>
             </div>
             <a class="prev" onclick="plusSlides(-1)">❮</a>
@@ -195,4 +202,4 @@ window.navigator.geolocation.getCurrentPosition(function(pos) {
     distance(pos.coords.longitude, pos.coords.latitude, 138.598730, -34.915410)
   ); 
 });
-  </script>
+</script>
