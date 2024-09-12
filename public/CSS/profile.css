@@ -14,3 +14,8 @@ body {
     max-width: 600px;
     margin-top: 20px;
 }
+
+.menubar-pc a:nth-child(3),
+.menubar-mobile a:nth-child(3) {
+  color: #f84747;
+}
