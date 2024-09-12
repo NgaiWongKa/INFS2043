@@ -44,42 +44,68 @@
 
     <div class="container profile-container">
         <div class="card profile-card">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <h2>Profile</h2>
+                <div>
+                    <button class="btn btn-primary" id="edit-button">Edit</button>
+                    <button class="btn btn-success" id="save-button" style="display: none;">Save</button>
+                </div>
             </div>
             <div class="card-body">
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <strong>First Name:</strong>
+                <form id="profile-form">
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <strong>First Name:</strong>
+                        </div>
+                        <div class="col-md-8">
+                            <%= currentUser.firstName %>
+                        </div>
                     </div>
-                    <div class="col-md-8">
-                        <%= currentUser.firstName %>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <strong>Last Name:</strong>
+                        </div>
+                        <div class="col-md-8">
+                            <%= currentUser.lastName %>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <strong>Last Name:</strong>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <strong>Date of Birth:</strong>
+                        </div>
+                        <div class="col-md-8">
+                            <%= currentUser.dob.toDateString() %>
+                        </div>
                     </div>
-                    <div class="col-md-8">
-                        <%= currentUser.lastName %>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <strong>Preferred Fuel:</strong>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="prefFuel" name="prefFuel" class="form-control" disabled>
+                                <option value="Ethanol 85" <%= currentUser.prefFuel === 'Ethanol 85' ? 'selected' : '' %>>Ethanol 85</option>
+                                <option value="Diesel" <%= currentUser.prefFuel === 'Diesel' ? 'selected' : '' %>>Diesel</option>
+                                <option value="Premium 95" <%= currentUser.prefFuel === 'Premium 95' ? 'selected' : '' %>>Premium 95</option>
+                                <option value="Unleaded 91" <%= currentUser.prefFuel === 'Unleaded 91' ? 'selected' : '' %>>Unleaded 91</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <strong>Date of Birth:</strong>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <strong>Preferred Supplier:</strong>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="prefSupplier" name="prefSupplier" class="form-control" disabled>
+                                <option value="Shell" <%= currentUser.prefSupplier === 'Shell' ? 'selected' : '' %>>Shell</option>
+                                <option value="Ampol" <%= currentUser.prefSupplier === 'Ampol' ? 'selected' : '' %>>Ampol</option>
+                                <option value="BP" <%= currentUser.prefSupplier === 'BP' ? 'selected' : '' %>>BP</option>
+                                <option value="Caltex" <%= currentUser.prefSupplier === 'Caltex' ? 'selected' : '' %>>Caltex</option>
+                                <option value="Mobil" <%= currentUser.prefSupplier === 'Mobil' ? 'selected' : '' %>>Mobil</option>
+                                <option value="United" <%= currentUser.prefSupplier === 'United' ? 'selected' : '' %>>United</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-md-8">
-                        <%= currentUser.dob.toDateString() %>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <strong>Preferred Fuel:</strong>
-                    </div>
-                    <div class="col-md-8">
-                        <%= currentUser.prefFuel %>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -120,5 +146,20 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>   
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('edit-button').addEventListener('click', function() {
+            document.getElementById('prefFuel').disabled = false;
+            document.getElementById('prefSupplier').disabled = false;
+            document.getElementById('save-button').style.display = 'inline-block';
+        });
+
+        document.getElementById('save-button').addEventListener('click', function() {
+            // Mock-up save logic
+            alert('Changes saved.');
+            document.getElementById('prefFuel').disabled = true;
+            document.getElementById('prefSupplier').disabled = true;
+            document.getElementById('save-button').style.display = 'none';
+        });
+    </script>
 </body>
 </html>
