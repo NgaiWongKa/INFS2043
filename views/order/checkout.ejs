@@ -74,18 +74,75 @@
             <div class="col-8">
                 <div class="d-grid">
                     <div class="justify-content-center m-3 p-5 bg-white shadow-sm rounded gap-1">
-                        hi
+                        <h4>Billing details</h4>
+                        <form>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="userGivenNames" class="form-label">Given name(s)</label>
+                                    <input type="text" class="form-control" id="userGivenNames" >
+                                </div>
+                                <div class="col-6">
+                                    <label for="userSurname" class="form-label">Surname</label>
+                                    <input type="text" class="form-control" id="userSurname" >
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                              <label for="userEmail" class="form-label">Your email address:</label>
+                              <input type="email" class="form-control" id="userEmail" aria-describedby="emailHelp">
+                              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                            </div>
+                            <div class="mb-3">
+                              <label for="userPassword" class="form-label">Password</label>
+                              <input type="password" class="form-control" id="userPassword">
+                            </div>
+                            <div class="mb-3 form-check">
+                              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
                     </div>
+
                     <div class="justify-content-center m-3 p-5 bg-white shadow-sm rounded gap-1">
                         hi
                     </div>
+
                     <div class="justify-content-center m-3 p-5 bg-white shadow-sm rounded gap-1">
-                        hi
+                        <form action="/order" method="POST">
+                            <h3>Select Payment Method</h3>
+                            <div>
+                                <input type="radio" id="paymentCash" name="paymentMethod" value="cash" checked>
+                                <label for="paymentCash">Cash</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="paymentCard" name="paymentMethod" value="card">
+                                <label for="paymentCard">Card</label>
+                            </div>
+                    
+                            <div id="cardDetails" style="display: none;">
+                                <label for="cvv">CVV:</label>
+                                <input type="text" id="cvv" name="cvv" placeholder="Enter CVV">
+                            </div>
+                    
+                            <button type="submit" class="btn btn-success">Place Order</button>
+                        </form>
+                        <script>
+                            document.querySelectorAll('input[name="paymentMethod"]').forEach((elem) => {
+                                elem.addEventListener('change', function(event) {
+                                    const cardDetails = document.getElementById('cardDetails');
+                                    if (event.target.value === 'card') {
+                                        cardDetails.style.display = 'block';
+                                    } else {
+                                        cardDetails.style.display = 'none';
+                                    }
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
             <div class="col-4">
-                <div class="card text-dark rounded shadow-sm">
+                <div class="card text-dark rounded shadow-sm mt-3">
                     <div class="card-header">
                         <h4 class="fw-bold" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">CART SUMMARY</h4>
                     </div>
@@ -103,54 +160,10 @@
                                     </li>
                                 <% }); %>
                             </ol>
-                            <form action="/order" method="POST">
-                                <h3>Select Payment Method</h3>
-                                <div>
-                                    <input type="radio" id="paymentCash" name="paymentMethod" value="cash" checked>
-                                    <label for="paymentCash">Cash</label>
-                                </div>
-                                <div>
-                                    <input type="radio" id="paymentCard" name="paymentMethod" value="card">
-                                    <label for="paymentCard">Card</label>
-                                </div>
-                        
-                                <div id="cardDetails" style="display: none;">
-                                    <label for="cvv">CVV:</label>
-                                    <input type="text" id="cvv" name="cvv" placeholder="Enter CVV">
-                                </div>
-                        
-                                <button type="submit" class="btn btn-success">Place Order</button>
-                            </form>
-                            <script>
-                                document.querySelectorAll('input[name="paymentMethod"]').forEach((elem) => {
-                                    elem.addEventListener('change', function(event) {
-                                        const cardDetails = document.getElementById('cardDetails');
-                                        if (event.target.value === 'card') {
-                                            cardDetails.style.display = 'block';
-                                        } else {
-                                            cardDetails.style.display = 'none';
-                                        }
-                                    });
-                                });
-                            </script>
                         <% } else { %>
                             <p>Your cart is empty. <a href="/menu">Go back to menu</a></p>
                         <% } %>
                             <form action="/order" method="POST">
-    </form>
-
-    <script>
-        document.querySelectorAll('input[name="paymentMethod"]').forEach((elem) => {
-            elem.addEventListener('change', function(event) {
-                const cardDetails = document.getElementById('cardDetails');
-                if (event.target.value === 'card') {
-                    cardDetails.style.display = 'block';
-                } else {
-                    cardDetails.style.display = 'none';
-                }
-            });
-        });
-    </script>
                     </div>
 
                     <div class="card-footer d-flex justify-content-between align-items-start">
