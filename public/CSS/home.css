@@ -13,7 +13,7 @@
 }
 .bg-header.bg1 {
   display: auto;
-  background-image: url(/images/home/petrol_station.jpg);
+  background-image: url(/images/home/Main.png);
   height: max-content;
   min-height: 607px;
   background-repeat: no-repeat;
@@ -24,7 +24,7 @@
 }
 .bg-header.bg2 {
   display: auto;
-  background-image: url(/images/home/GasStation.png);
+  background-image: url(/images/home/petrol_station_close_view.jpg);
   height: max-content;
   min-height: 607px;
   background-repeat: no-repeat;
@@ -35,7 +35,7 @@
 }
 .bg-header.bg3 {
   display: auto;
-  background-image: url(/images/home/smiling_people_with_groceries.jpg);
+  background-image: url(/images/home/2nd.png);
   height: max-content;
   min-height: 607px;
   background-repeat: no-repeat;
