@@ -2,3 +2,202 @@
 .menubar-mobile a:nth-child(2) {
   color: #f84747;
 }
+
+/*______ Slideshow _____*/
+.slideshow {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+}
+.bg-header.bg1 {
+  display: auto;
+  background-image: url(/images/home/GasStation.png);
+  height: max-content;
+  min-height: 607px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(51, 51, 51, 0.6);
+  background-blend-mode: multiply;
+}
+.bg-header.bg2 {
+  display: auto;
+  background-image: url(/images/home/3.png);
+  height: max-content;
+  min-height: 607px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(51, 51, 51, 0.6);
+  background-blend-mode: multiply;
+}
+.bg-header.bg3 {
+  display: auto;
+  background-image: url(/images/home/4.png);
+  height: max-content;
+  min-height: 607px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(51, 51, 51, 0.6);
+  background-blend-mode: multiply;
+}
+
+/*menu-container*/
+.slideshow .menu-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  position: absolute;
+  top: 25%;
+  gap: 20px;
+  animation-name: fadeInBottom;
+  animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+  animation-duration: 2s;
+}
+.slideshow h5 {
+  color: var(--text);
+  font-size: 60px;
+  line-height: 1.1em;
+  margin: 0 0 10px 0;
+  font-family: "Playfair Display", Sans-serif;
+  width: 100%;
+  text-align: center;
+}
+.slideshow p {
+  font-family: "Open Sans", Sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  text-align: center;
+  align-self: center;
+  max-width: 856px;
+  color: var(--text);
+}
+.slideshow .btn_menu {
+  margin: 30px 0px 94px 0px;
+  border-radius: 0px 0px 0px 0px;
+  text-align: center;
+}
+#viewmenu {
+  font-family: "Open Sans", Sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  background-color: var(--bgbody);
+  color: var(--textbutton);
+  padding: 22px 30px 22px 30px;
+}
+#viewmenu:hover {
+  background-color: #cbccce;
+  color: var(--bgbody);
+}
+
+/*background*/
+.slideshow img {
+  width: 100%;
+}
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-size: 40px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+.prev:hover,
+.next:hover {
+  color: black;
+}
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+
+/* Main menu*/
+.Menu {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 930px;
+  width: 100%;
+  padding: 10px 0px 10px 70px;
+  display: flex;
+}
+.Container_price .fa{
+  margin-right: 10px;
+}
+.khung {
+  display: flex;
+  opacity: 0;
+  transition: all 1s ease-out;
+  transform: translate3d(-100%, 0, 0);
+}
+.khung.fadeInLeft {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+
+/* --------ANIMATION-------- */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.fade-in {
+  animation: fade-in linear 0.5s;
+}
+
+.fade-out {
+  animation: fade-out linear 0.5s;
+}
+
+.slide-in {
+  animation: slide-in 0.5s forwards;
+}
+
+.slide-out {
+  animation: slide-out 0.5s forwards;
+}
