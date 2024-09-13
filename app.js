@@ -138,7 +138,43 @@ app.get("/logout", function (req, res) {
   });
 });
 
+app.post('/fuel/pay', async (req, res) => {
+  const { fuelType, amount } = req.body;
+  // Logic to process payment and reserve a pump
+  const availablePump = await getAvailablePump(); // Implement this function to get an available pump
+  if (availablePump) {
+      // Add fuel details to the cart
+      req.session.cart = req.session.cart || [];
+      req.session.cart.push({
+          item: 'Fuel',
+          name: `${amount} Liters of ${fuelType}`,
+          price: calculateFuelPrice(fuelType, amount), // Implement this function to calculate the price
+          quantity: 1,
+          promo_percentage: 0
+      });
+      res.json({ pump: availablePump });
+  } else {
+      res.status(500).json({ error: 'No pumps available' });
+  }
+});
 
+const getAvailablePump = async () => {
+  // Mock implementation to get an available pump
+  const pumps = ['Pump 1', 'Pump 2', 'Pump 3', 'Pump 4'];
+  const reservedPumps = []; // Fetch reserved pumps from your database or session
+  const availablePump = pumps.find(pump => !reservedPumps.includes(pump));
+  return availablePump;
+};
+
+const calculateFuelPrice = (fuelType, amount) => {
+  const fuelPrices = {
+      'Ethanol 85': 1.50,
+      'Diesel': 1.20,
+      'Premium 95': 1.80,
+      'Unleaded 91': 1.40
+  };
+  return fuelPrices[fuelType] * amount;
+};
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();
