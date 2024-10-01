@@ -119,25 +119,16 @@
                     </div>
                     <div class="card-body order-history">
                         <ul class="list-group">
-                            <% const orders = [
-                                { date: '2024-10-01', total: 50.00, items: ['Ethanol 85', 'Burger', 'Fries'] },
-                                { date: '2024-09-25', total: 30.00, items: ['Diesel'] },
-                                { date: '2024-09-20', total: 45.00, items: ['Premium 95', 'Pizza'] },
-                                { date: '2024-09-15', total: 25.00, items: ['Unleaded 91'] },
-                                { date: '2024-09-10', total: 30.00, items: ['Pasta', 'Salad'] },
-                                { date: '2024-09-05', total: 20.00, items: ['Diesel'] },
-                                { date: '2024-09-01', total: 35.00, items: ['Premium 95'] },
-                                { date: '2024-08-28', total: 40.00, items: ['Unleaded 91', 'Sandwich'] },
-                                { date: '2024-08-25', total: 55.00, items: ['Ethanol 85', 'Steak'] },
-                                { date: '2024-08-20', total: 30.00, items: ['Diesel'] }
-                            ]; %>
                             <% orders.forEach(order => { %>
                                 <li class="list-group-item">
-                                    <strong>Date:</strong> <%= order.date %> <br>
-                                    <strong>Total:</strong> $<%= order.total.toFixed(2) %> <br>
-                                    <strong>Items:</strong> <%= order.items.join(', ') %>
+                                    <strong>Date:</strong> <%= order.orderedAt %> <br>
+                                    <strong>Total:</strong> $<%= order.totalAmount.toFixed(2) %> <br>
+                                    <strong>Items:</strong> <%= order.items.map(item => item.itemName).join(', ') %>
                                 </li>
                             <% }); %>
+                            <% if (orders.length === 0) { %>
+                                <li class="list-group-item">No orders found.</li>
+                            <% } %>
                         </ul>
                     </div>
                 </div>

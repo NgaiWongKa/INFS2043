@@ -16,6 +16,8 @@ const Station = require("./model/Stations");
 const flash = require('connect-flash');
 const http = require('http');
 const socketIo = require('socket.io');
+const Order = require('./model/Order');
+const { format } = require('date-fns');
 
 const apiKey = 'YOUR_API_KEY'; // Replace with your API key
 
@@ -81,8 +83,13 @@ app.get("/register", function (req, res) {
   res.render("Login/register");
 });
 
-app.get("/profile", function (req, res) {
-  res.render("Login/profile");
+app.get("/profile", isLoggedIn, async (req, res) => {
+    const orders = await Order.find({ user: req.user._id }).populate('items.item');
+    const formattedOrders = orders.map(order => ({
+      ...order.toObject(),
+      orderedAt: format(order.orderedAt, 'yyyy-MM-dd HH:mm')
+  }));
+    res.render("Login/profile", { currentUser: req.user, orders: formattedOrders });
 });
 
 // Handling user signup
