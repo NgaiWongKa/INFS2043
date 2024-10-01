@@ -19,8 +19,6 @@ const socketIo = require('socket.io');
 const Order = require('./model/Order');
 const { format } = require('date-fns');
 
-const apiKey = 'YOUR_API_KEY'; // Replace with your API key
-
 const crypto = require('crypto');
 let app = express();
 

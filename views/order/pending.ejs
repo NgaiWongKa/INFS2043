@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Orders</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        socket.emit('registerUser', '<%= currentUser._id %>', 'customer');
+
+        socket.on('orderReady', (orderId) => {
+            alert(`Your order is now ready!`);
+            location.reload();
+        });
+    </script>
+</head>
+<body>
+    <h1>Your Pending Orders</h1>
+    <ul>
+        <% orders.forEach(order => { %>
+            <li>Order ID: <%= order._id %>, Status: <%= order.status %></li>
+        <% }); %>
+    </ul>
+    <% if (orders.length === 0) { %>
+        <p>No pending orders.</p>
+    <% } %>
+</body>
+</html>
