@@ -120,3 +120,22 @@
   text-decoration: underline;
 }
 
+.alert {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  color: #721c24;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.alert {
+  text-align: center;
+}

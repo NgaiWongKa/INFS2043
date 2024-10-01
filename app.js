@@ -9,10 +9,15 @@ const express = require("express"),
     require("passport-local-mongoose"),
   methodOverride = require('method-override'),
   menuRoutes = require('./routes/menu'),
-  cartRoutes = require('./routes/cart'),
-  orderRoutes = require('./routes/order')
+  cartRoutes = require('./routes/cart')
+  //orderRoutes = require('./routes/order')
 const User = require("./model/Users");
 const Station = require("./model/Stations");
+const flash = require('connect-flash');
+const http = require('http');
+const socketIo = require('socket.io');
+
+const apiKey = 'YOUR_API_KEY'; // Replace with your API key
 
 const crypto = require('crypto');
 let app = express();
@@ -33,6 +38,11 @@ app.use(express.static('./assets'));
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
+const server = http.createServer(app);
+const io = socketIo(server);
+
+let userSockets = {};
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -41,6 +51,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated();
   res.locals.currentUser = req.user;
+  req.io = io;
   next();
 });
 app.use(express.static('access'));
@@ -106,25 +117,30 @@ app.post("/register", function (req, res) {
 });
 
 //Showing login form
-app.get("/login", function (req, res) {
-  res.render("Login/login");
+app.get('/login', (req, res) => {
+  res.render('Login/login', {
+    messages: {
+      error: req.flash('error'),
+      success: req.flash('success'),
+    }
+  });
 });
 
 //Handling user login
 app.post("/login", function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
     if (err) {
-      return next(err); // Handle error
+      return next(err);
     }
     if (!user) {
-      // User not found or password mismatch
-      return res.status(400).json({ error: "Invalid username or password" });
+      req.flash('error', 'Invalid username or password');
+      return res.redirect('/login');
     }
     req.logIn(user, function (err) {
       if (err) {
-        return next(err); // Handle error during login
+        return next(err);
       }
-      // Successfully logged in, redirect to home or secret page
+      req.flash('success', 'Login successful!');
       return res.redirect("/");
     });
   })(req, res, next);
@@ -181,11 +197,6 @@ function isLoggedIn(req, res, next) {
   res.redirect("Login/login");
 }
 
-let port = process.env.PORT || 3000;
-app.listen(port, function () {
-  console.log("Server Has Started!");
-});
-
 app.get('/profile/edit', (req, res) => {
   res.render('Login/edit', { user: req.user });
 });
@@ -232,4 +243,35 @@ app.get('/GPS', async (req, res) => {
 
 app.use('/menu', menuRoutes);
 app.use('/cart', cartRoutes);
-app.use('/order', orderRoutes);
+
+io.on('connection', (socket) => {
+  console.log('New client connected');
+
+  socket.on('registerUser', (userId) => {
+      if (!userSockets[userId]) {
+          userSockets[userId] = [];
+      }
+      userSockets[userId].push(socket.id);
+      console.log(`User ${userId} connected with socket ID: ${socket.id}`);
+  });
+
+  socket.on('disconnect', () => {
+      console.log('Client disconnected');
+      for (const userId in userSockets) {
+          userSockets[userId] = userSockets[userId].filter(id => id !== socket.id);
+          if (userSockets[userId].length === 0) {
+              delete userSockets[userId];
+          }
+      }
+  });
+});
+
+const orderRoutes = require('./routes/order');
+
+app.use('/order', orderRoutes(userSockets));
+
+let port = process.env.PORT || 3000;
+server.listen(port, function () {
+  console.log("Server Has Started!");
+});
+
