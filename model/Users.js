@@ -42,6 +42,12 @@ var User = new Schema({
     },
     expirationYear: {
         type: String
+    },
+    point: {
+        type: Number
+    },
+    grade: {
+        type: String
     }
 })
 
