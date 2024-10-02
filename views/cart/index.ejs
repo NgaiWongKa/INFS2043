@@ -30,52 +30,77 @@
   <body>
     <!---------NAVBAR---------->
     <section class="header-container">
-        <div class="header-c  ontainer-flex-desktop">
-          <div class="Logo-desktop">
-            <a href="/home"><img src="./images/logo.png" alt="" /></a>
-          </div>
-          <div class="menubar-pc">
-            <a class="item" href="/home"><span>Home</span></a>
-
-            <% if (!isAuthenticated) { %>
-              <a class="item" href="/login"><span>Login</span></a>
-              <a class="item" href="/register"><span>Register</span></a>
-            <% } else { %>
-              <% if (currentUser.type === 'staff') { %>
-                <a href="/order/staff" class="item">View Pending Orders</a>
-            <% } %>
-              <a class="item" href="/menu"><span>Menu</span></a>
-              <a class="item" href="/profile"><span>Profile</span></a>
-              <a class="item" href="/logout"><span>Log out</span></a>
-              <a class="item" href="/order/pending"><span>Pending</span></a>
-            <% } %>
-            <a class="item" href="/GPS"><span>GPS</span></a>
-          </div>
+      <div class="header-c  ontainer-flex-desktop">
+        <div class="Logo-desktop">
+          <a href="/home"><img src="./images/logo.png" alt="" /></a>
         </div>
+        <div class="menubar-pc">
+          <a class="item" href="/home"><span>Home</span></a>
+
+          <% if (!isAuthenticated) { %>
+            <a class="item" href="/login"><span>Login</span></a>
+            <a class="item" href="/register"><span>Register</span></a>
+          <% } else { %>
+            <% if (currentUser.type === 'staff') { %>
+              <a href="/order/staff" class="item">View Pending Orders</a>
+          <% } %>
+            <a class="item" href="/menu"><span>Menu</span></a>
+            <a class="item" href="/profile"><span>Profile</span></a>
+            <a class="item" href="/logout"><span>Log out</span></a>
+            <a class="item" href="/order/pending"><span>Pending</span></a>
+          <% } %>
+          <a class="item" href="/GPS"><span>GPS</span></a>
+        </div>
+      </div>
     </section>
     
     <!-- Main -->
-    <h1>Your Cart</h1>
-    <ul>
-        <% cart.forEach(function(cartItem) { %>
-            <li>
-                <h3><%= cartItem.name %></h3>
-                <p>
-                    Price: $<%= cartItem.price.toFixed(2) %>
-                </p>
-                <% if (cartItem.promo_percentage > 0) { %>
-                    <p>Discount: <%= cartItem.promo_percentage %>%</p>
-                <% } %>
-                <p>Quantity: <%= cartItem.quantity %></p>
-                <p>Total: $<%= ((cartItem.price - ( (cartItem.promo_percentage) / 100 * cartItem.price)) * cartItem.quantity).toFixed(2) %></p>
-            </li>
-        <% }) %>
-    </ul>
+    <div class="container mt-4 mb-4">
 
-    <h2>Total Amount: $<%= cart.reduce((total, cartItem) => total + ((cartItem.price - ((cartItem.promo_percentage) / 100 * cartItem.price)) * cartItem.quantity), 0).toFixed(2) %></h2>
+      <div class="text-center">
+        <h1>Your Cart</h1>
+        <a href="/menu" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">Back to shopping?</a>
+      </div>
 
-    <a href="/menu">Back to menu</a>
-    <a href="/order">Proceed to Checkout</a>
+      <div class="bg-white shadow-sm rounded border border-secondary mt-3 p-3">
+        <div class="table-responsive">
+          <table class="table table-hover border fs-6">
+            <thead class="table-dark">
+              <tr class="align-middle">
+                <th scope="col">Item Details</th>
+                <th scope="col">Price</th>
+                <th scope="col">Discount</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% cart.forEach(function(cartItem) { %>
+                <tr class="align-middle">
+                  <td><%= cartItem.name %></td>
+                  <td>$<%= cartItem.price.toFixed(2) %></td>
+                  <td><%= cartItem.promo_percentage %>%</td>
+                  <td><%= cartItem.quantity %></td>
+                  <td>$<%= ((cartItem.price - ( (cartItem.promo_percentage) / 100 * cartItem.price)) * cartItem.quantity).toFixed(2) %></td>
+                  <td class="text-center">
+                    <!--Remove item from cart button-->
+                    <button type="button" class="btn btn-link link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Remove</button>
+                    <!---->
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="text-end">
+          <span class="text-muted">Total amount</span> <br />
+          <span class="fw-bold fs-4">$<%= cart.reduce((total, cartItem) => total + ((cartItem.price - ((cartItem.promo_percentage) / 100 * cartItem.price)) * cartItem.quantity), 0).toFixed(2) %></span> <br />
+          <a href="/order" class="btn btn-success mt-3">Checkout now</a>
+        </div>
+      </div>
+    </div>
 
     <!---------FOOTER---------->
     <section class="footer-container">
