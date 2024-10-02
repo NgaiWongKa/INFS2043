@@ -55,66 +55,17 @@
     <!---------MAIN CONTENT---------->
 
     <div class="container mt-5 mb-5">
-        <h1 class="mb-4 text-center" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">One more step to go...</h1>
+        <div class="text-center">
+            <h1>Complete Your Purchase</h1>
+            <a href="/menu" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">Back to shopping?</a>
+          </div>
 
         <form action="/order" method="POST">
             <div class="row">
                 <div class="col-8">
                     <div class="d-grid">
-                        <div class="justify-content-center m-3 p-5 bg-white shadow-sm rounded gap-1">
-                            <h4 class="fs-3">Billing Details</h4>
-                            <form> <!--Needs to be moved-->
-                                <div class="row mb-3 mt-4">
-                                    <div class="col-6">
-                                        <input type="text" class="form-control" id="userGivenNames" placeholder="Given name(s)">
-                                    </div>
-                                    <div class="col-6">
-                                        <input type="text" class="form-control" id="userSurname" placeholder="Surname" >
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                  <input type="email" class="form-control" id="userEmail" aria-describedby="emailHelp" placeholder="Email address">
-                                </div>
-                                <div class="mb-3">
-                                    <input type="tel" class="form-control" id="userPhoneNumber" placeholder="Phone number" >
-                                </div>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" id="userAddressSt" placeholder="Address" >
-                                </div>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" id="userAddressApt" placeholder="Apt, Suite" >
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" id="userAddressCity" placeholder="City" >
-                                    </div>
-                                    <div class="col-4">
-                                        <select class="form-select" id="userAddressState">
-                                            <option selected>State</option>
-                                            <option value="South Australia">South Australia</option>
-                                            <option value="Western Australia">Western Australia</option>
-                                            <option value="Queensland">Queensland</option>
-                                            <option value="New South Wales">New South Wales</option>
-                                            <option value="Victoria">Victoria</option>
-                                            <option value="Tasmania">Tasmania</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" id="userAddressPostcode" placeholder="Postal code" >
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" id="userAddressCountry" placeholder="Country" value="Australia" disabled>
-                                </div>
-                            </form>
-                        </div>
-    
-                        <div class="justify-content-center m-3 p-5 bg-white shadow-sm rounded gap-1">
-                            hi
-                        </div>
-    
-                        <div class="justify-content-center m-3 p-5 bg-white shadow-sm rounded gap-1">
-                                <h4 class="fs-3">Payment Methods</h4>
+                        <div class="justify-content-center m-3 p-5 bg-white border border-secondary shadow-sm rounded gap-1">
+                                <h4 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Payment Methods</h4>
                                 <div>
                                     <input type="radio" id="paymentCash" name="paymentMethod" value="cash" checked>
                                     <label for="paymentCash">Cash</label>
@@ -145,7 +96,7 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="card text-dark rounded shadow-sm mt-3">
+                    <div class="card text-dark border border-secondary rounded shadow-sm mt-3">
                         <div class="card-header">
                             <h4 class="fw-bold" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">CART SUMMARY</h4>
                         </div>
