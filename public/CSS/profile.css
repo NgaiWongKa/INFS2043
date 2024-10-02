@@ -1,3 +1,6 @@
+.menubar-pc a:nth-child(4) {
+    color: #f84747;
+  }
 .profile-container {
     display: flex;
     justify-content: center;

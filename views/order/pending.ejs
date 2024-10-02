@@ -3,6 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/CSS/font-awesome.min.css" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">  -->
+      <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        rel="icon"
+        href="https://ld-wp.template-help.com/wordpress_prod-22160/v1/wp-content/uploads/2019/02/cropped-favicon-32x32.png"
+        sizes="32x32"
+      />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/CSS/pending.css">
+    <link rel="stylesheet" href="/CSS/base.css">
     <title>Pending Orders</title>
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -16,6 +35,30 @@
     </script>
 </head>
 <body>
+    <!---------NAVBAR---------->
+    <section class="header-container">
+        <div class="header-container-flex-desktop">
+          <div class="Logo-desktop">
+            <a href="/home"><img src="./images/logo.png" alt="" /></a>
+          </div>
+          <div class="menubar-pc">
+            <a class="item" href="/home"><span>Home</span></a>
+
+            <% if (!isAuthenticated) { %>
+              <a class="item" href="/login"><span>Login</span></a>
+              <a class="item" href="/register"><span>Register</span></a>
+            <% } else { %>
+              <% if (currentUser.type === 'staff') { %>
+                <a href="/order/staff" class="item">View Pending Orders</a>
+            <% } %>
+              <a class="item" href="/menu"><span>Menu</span></a>
+              <a class="item" href="/profile"><span>Profile</span></a>
+              <a class="item" href="/logout"><span>Log out</span></a>
+              <a class="item" href="/order/pending"><span>Pending</span></a>
+            <% } %>
+            <a class="item" href="/GPS"><span>GPS</span></a>
+          </div>
+      </section>
     <h1>Your Pending Orders</h1>
     <ul>
         <% orders.forEach(order => { %>
@@ -25,5 +68,44 @@
     <% if (orders.length === 0) { %>
         <p>No pending orders.</p>
     <% } %>
+
+
+    <!---------FOOTER---------->
+    <section class="footer-container">
+      <div class="footer-content">
+        <div class="footer-item">
+          <div class="footer-title">Address</div>
+          <div class="footer-item-content">
+            <br /> Mawson Lakes Blvd, Mawson Lakes SA 5095
+          </div>
+        </div>
+        <div class="footer-item">
+          <div class="footer-title">Follow us</div>
+          <div class="footer-item-content" id="icon-box">
+            <a href="https://www.facebook.com" target="_blank"
+              ><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.twitter.com" target="_blank"
+              ><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://www.google.com" target="_blank"
+              ><i class="fa-brands fa-google"></i></a>
+            <a href="https://www.linkedin.com" target="_blank"
+              ><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.pinterest.com" target="_blank"
+              ><i class="fa-brands fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-item">
+          <div class="footer-title">Contact us</div>
+          <div class="footer-item-content">
+            <a href="callto:+1 800 603 6035">+61 47 369 6999</a><br />
+            <a href="callto:+1 800 603 6035">+61 47 369 6969</a><br />
+            <a href="mailto:mail@demolink.org">UTRmail@demolink.org</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="copyright">
+      <p>Copyright © 2019. All Rights Reserved Theme design by Zemez</p>
+    </div>
 </body>
 </html>
