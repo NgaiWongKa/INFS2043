@@ -139,29 +139,6 @@ body {
     display: none;
   }
   
-  .menubar-mobile {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 320px;
-    max-width: 100%;
-    background-color: var(--bgheader);
-    flex-direction: column;
-    gap: 20px;
-    padding: 90px 0 0 60px;
-    display: none;
-    z-index: 99;
-  }
-  
-  .menubar-mobile a {
-    color: #ffffff;
-    text-align: left;
-    margin: 0 5px;
-    font-family: "Playfair Display", Sans-serif;
-    font-size: 18px;
-    padding-bottom: 10px;
-  }
   
   .btn-close {
     position: absolute;
