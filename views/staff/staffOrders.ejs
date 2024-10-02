@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/CSS/base.css" />
     <title>Staff Orders</title>
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -11,8 +12,32 @@
     </script>
 </head>
 <body>
-    
-    <h1>Pending Orders</h1>
+    <!---------NAVBAR---------->
+    <section class="header-container">
+        <div class="header-container-flex-desktop">
+          <div class="Logo-desktop">
+            <a href="/home"><img src="./images/logo.png" alt="" /></a>
+          </div>
+          <div class="menubar-pc">
+            <a class="item" href="/home"><span>Home</span></a>
+
+            <% if (!isAuthenticated) { %>
+              <a class="item" href="/login"><span>Login</span></a>
+              <a class="item" href="/register"><span>Register</span></a>
+            <% } else { %>
+              <% if (currentUser.type === 'staff') { %>
+                <a href="/order/staff" class="item">View Pending Orders</a>
+            <% } %>
+              <a class="item" href="/menu"><span>Menu</span></a>
+              <a class="item" href="/profile"><span>Profile</span></a>
+              <a class="item" href="/logout"><span>Log out</span></a>
+              <a class="item" href="/order/pending"><span>Pending</span></a>
+            <% } %>
+            <a class="item" href="/GPS"><span>GPS</span></a>
+          </div>
+      </section>
+
+    <h1 style="margin: 20px;">Pending Orders</h1>
     <table>
         <thead>
             <tr>
@@ -49,5 +74,43 @@
             <% }) %>
         </tbody>
     </table>
+
+          <!---------FOOTER---------->
+          <section class="footer-container">
+            <div class="footer-content">
+              <div class="footer-item">
+                <div class="footer-title">Address</div>
+                <div class="footer-item-content">
+                  <br /> Mawson Lakes Blvd, Mawson Lakes SA 5095
+                </div>
+              </div>
+              <div class="footer-item">
+                <div class="footer-title">Follow us</div>
+                <div class="footer-item-content" id="icon-box">
+                  <a href="https://www.facebook.com" target="_blank"
+                    ><i class="fa-brands fa-facebook-f"></i></a>
+                  <a href="https://www.twitter.com" target="_blank"
+                    ><i class="fa-brands fa-twitter"></i></a>
+                  <a href="https://www.google.com" target="_blank"
+                    ><i class="fa-brands fa-google"></i></a>
+                  <a href="https://www.linkedin.com" target="_blank"
+                    ><i class="fa-brands fa-linkedin"></i></a>
+                  <a href="https://www.pinterest.com" target="_blank"
+                    ><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+              </div>
+              <div class="footer-item">
+                <div class="footer-title">Contact us</div>
+                <div class="footer-item-content">
+                  <a href="callto:+1 800 603 6035">+61 47 369 6999</a><br />
+                  <a href="callto:+1 800 603 6035">+61 47 369 6969</a><br />
+                  <a href="mailto:mail@demolink.org">UTRmail@demolink.org</a>
+                </div>
+              </div>
+            </div>
+          </section>
+          <div class="copyright">
+            <p>Copyright © 2019. All Rights Reserved Theme design by Zemez</p>
+          </div>
 </body>
 </html>
