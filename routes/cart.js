@@ -35,7 +35,6 @@ router.post("/add/:id", async (req, res) => {
 
 router.get("/", (req, res) => {
     const cart = req.session.cart || [];
-
     res.render("cart/index", { cart: cart });
 });
 
