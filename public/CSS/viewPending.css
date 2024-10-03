@@ -1,3 +1,49 @@
 .menubar-pc a:nth-child(2) {
     color: #f84747;
   }
+
+  .orders-container {
+    max-height: calc(100vh - 100px); 
+    overflow-y: auto;
+    padding: 10px;
+    flex: 1; 
+  }
+
+.order-box {
+    border: 1px solid #ffffff6e;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.footer-container {
+    background-color: #333;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: auto;
+}
+
+.copyright {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.table-box {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
