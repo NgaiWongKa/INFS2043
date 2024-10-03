@@ -22,10 +22,14 @@
         <% } %>
 
         <style>
-
             .card-img-top {
                 width: 100%;
                 height: 20vh;
+                object-fit: contain;
+            }
+            #foodItemImage.card-img-top {
+                width: 100%;
+                height: 28vh;
                 object-fit: contain;
             }
         </style>
@@ -227,46 +231,40 @@
                 <% menuItems.forEach(item => { %>
                 <div class="col-3 mb-4">
                     <div class="card border border-secondary border-opacity-25 rounded">
-                        <img src="/food_items/<%= item.image %>" class="card-img-top p-4" alt="<%= item.name %>">
+                        <img id="foodItemImage" src="/food_items/<%= item.image %>" class="card-img-top p-4" alt="<%= item.name %>">
                         <div class="card-body">
-                            <div class="text-center">
-                                <p class="card-title fw-bold fs-6"><%= item.name %></p>
+                            <div class="d-flex gap-2 justify-content-center align-items-center">
+                                <% if (item.promo_percentage > 0) { %>
+                                    <p class="card-title fw-bold fs-4">$<%= ((item.price - ((item.promo_percentage / 100) * item.price))).toFixed(2) %></p>
+                                    <p class="card-title fs-7 text-muted"><del>$<%= item.price %></del></p>
+                                    <span class="badge rounded-pill text-bg-warning"><span class="fw-bold"><%= item.promo_percentage %>%</span> discount!</span>
+                                <% } else { %>
+                                    <p class="card-title fw-bold fs-4">$<%= item.price %></p>
+                                <% } %>
                             </div>
-                            <p class="card-text text-truncate"><%= item.description %></p>
-                        </div>
-                    </div>
-                </div>
-                <% }); %>                
-            </div>
-
-            <div class="row">
-                <% menuItems.forEach(item => { %>
-                <div class="col-md-4 mb-4">
-                    <div class="card border-secondary shadow rounded">
-                        <div class="text-center m-3">
-                            <img src="/food_items/<%= item.image %>" class="card-img-top" alt="<%= item.name %>" style="width:75%;height: auto;">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title"><%= item.name %></h5>
-                            <p class="card-text text-truncate"><%= item.description %></p>
-                            <p class="card-text">Price: $<%= item.price %></p>
+                            <p class="card-text fw-bold fs-5"><%= item.name %></p>
+                            <p class="card-text text-muted text-truncate"><%= item.description %></p>
                             <form class="add-to-cart-form" data-id="<%= item._id %>">
-                                <div class="form-group">
-                                    <label for="quantity">Quantity:</label>
-                                    <input type="number" name="quantity" class="form-control" value="1" min="1">
+                                <div class="input-group">
+                                    <span class="input-group-text">Quantity</span>
+                                    <input type="number" name="quantity" class="form-control" style="width: 20%;" value="1" min="1">
                                 </div>
-                                <button type="submit" class="btn btn-success btn-block">Add to Cart</button>
+                                <div class="d-grid col-8 mx-auto">
+                                    <button type="submit" class="btn btn-success mt-3">Add to Cart</button>
+                                </div>
                             </form>
                             <% if (currentUser.type == "staff") { %>
-                            <a href="/menu/<%= item._id %>/edit" class="btn btn-outline-warning btn-block mt-2">Edit</a>
-                            <form action="/menu/<%= item._id %>?_method=DELETE" method="POST" class="mt-2">
-                                <button type="submit" class="btn btn-outline-danger btn-block">Delete</button>
-                            </form>
+                                <div class="d-grid col-8 mx-auto">
+                                    <a href="/menu/<%= item._id %>/edit" class="btn btn-outline-warning mt-2">Edit</a>
+                                </div>
+                                <form action="/menu/<%= item._id %>?_method=DELETE" method="POST" class="d-grid col-8 mx-auto">
+                                    <button type="submit" class="btn btn-outline-danger mt-2">Delete</button>
+                                </form>
                             <% } %>
                         </div>
                     </div>
                 </div>
-                <% }); %>
+                <% }); %>                
             </div>
         </div>
         <!-------------------------->
