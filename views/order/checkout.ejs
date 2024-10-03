@@ -172,7 +172,7 @@
                             <span class="fw-bold">
                                 Estimated Total: 
                             </span>
-                            <span class="fs-3">$<%= cart.reduce((total, cartItem) => total + (cartItem.price - ( cartItem.promo_percentage / 100 * cartItem.price ) * cartItem.quantity), 0).toFixed(2) %></span>
+                            <span class="fs-3">$<%= cart.reduce((total, cartItem) => total + ((cartItem.price - ((cartItem.promo_percentage) / 100 * cartItem.price)) * cartItem.quantity), 0).toFixed(2) %></span>
                         </div>
                     </div>
                     <form action="/order" method="POST">
