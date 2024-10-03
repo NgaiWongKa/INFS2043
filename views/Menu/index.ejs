@@ -167,6 +167,17 @@
                         <div class="card-body">
                             <form id="fuel-form">
                                 <div class="input-group mb-3">
+                                    <span class="input-group-text">Location</span>
+                                    <select id="station" name="station" class="form-control">
+                                        <option value="Station 1" selected>Station 1 (2.5 km) - 15 Elder Smith Road, Mawson Lakes SA 5095</option>
+                                        <option value="Station 2">Station 2 (4.2 km) - 72 Salisbury Highway, Salisbury SA 5108</option>
+                                        <option value="Station 3">Station 3 (4.9 km) - 42 McIntyre Road, Para Hills SA 5096</option>
+                                        <option value="Station 4">Station 4 (5.1 km) - 180 Kings Road, Parafield Gardens SA 5107</option>
+                                        <option value="Station 5">Station 5 (6.0 km) - 600 Main North Road, Pooraka SA 5095</option>
+                                        <option value="Station 6">Station 6 (8.2 km) - 50 Anderson Walk, Smithfield SA 5114</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
                                     <span class="input-group-text">Fuel Type</span>
                                     <select id="fuelType" name="fuelType" class="form-control">
                                         <option value="Ethanol 85" <%= currentUser.prefFuel === 'Ethanol 85' ? 'selected' : '' %>>Ethanol 85</option>
@@ -237,10 +248,28 @@
                 <p class="text-muted">Browse through a variety of items!</p>
             </div>
 
-            <% if (currentUser.type == "staff") { %>
-            <a href="/menu/new" class="btn btn-success mb-3">Add New Item</a>
-            <% } %>
-            <a href="/cart" class="btn btn-primary mb-3">View Cart</a>
+            <div class="d-flex flex-row gap-2 justify-content-center">
+                <% if (currentUser.type == "staff") { %>
+                    <a href="/menu/new" class="btn btn-success mb-3">Add New Item</a>
+                    <% } %>
+                <a href="/cart" class="btn btn-primary mb-3">View Cart</a>
+            </div>
+
+            <div class="row">
+                <% menuItems.forEach(item => { %>
+                <div class="col-3 mb-4">
+                    <div class="card border border-secondary border-opacity-25 rounded">
+                        <img src="/food_items/<%= item.image %>" class="card-img-top p-4" alt="<%= item.name %>">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <p class="card-title fw-bold fs-6"><%= item.name %></p>
+                            </div>
+                            <p class="card-text text-truncate"><%= item.description %></p>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>                
+            </div>
 
             <div class="row">
                 <% menuItems.forEach(item => { %>
@@ -314,12 +343,21 @@
 
             document.querySelectorAll('#chooseButton').forEach(button => {
                 button.addEventListener('click', () => {
-                    pumpEl.hidden = !pumpEl.hidden;
+                    if (pumpEl.hasAttribute('hidden') && button.textContent === 'SELECT') {
+                        pumpEl.removeAttribute('hidden');
+                    } else if (!pumpEl.hasAttribute('hidden') && !(button.textContent === 'SELECT')) {
+                        pumpEl.setAttribute('hidden', '');
+                    }
 
-                    if (!pumpEl.hidden) {
-                        button.textContent = 'DE-SELECT'; 
+                    if (button.textContent === "DE-SELECT") {
+                        button.textContent = 'SELECT';
                     } else {
-                        button.textContent = 'SELECT'; 
+                        button.textContent = 'DE-SELECT';
+                        document.querySelectorAll('#chooseButton').forEach(otherButton => {
+                            if (!Object.is(otherButton, button)) {
+                                otherButton.textContent = 'SELECT';
+                            }
+                        });
                     }
                 });
             });
