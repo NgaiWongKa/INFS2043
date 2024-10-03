@@ -102,7 +102,7 @@
                                                                 $<%= item.price %> 
                                                             </td>
                                                             <td>
-                                                                %<%= item.promo_percentage %> 
+                                                                <%= item.promo_percentage %>%
                                                             </td>
                                                             <td>
                                                                 $<%= ((item.price - (item.promo_percentage / 100 * item.price)) * item.quantity).toFixed(2) %>
