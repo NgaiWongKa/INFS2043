@@ -81,6 +81,12 @@
         </section>
           
           <!---Body Here-->
+          <select id="station-select">
+            <option value="all" selected>All Stations</option>
+            <% stations.forEach(station => { %>
+                <option value="<%= station.name %>"><%= station.name %></option>
+            <% }) %>
+          </select>
           <div id="stations-list" hidden></div>
 
           <script>
@@ -174,58 +180,77 @@
 
     <script>
       const stations = <%- JSON.stringify(stations) %>;
-
+      let map;
+      let markers = [];
+  
       function initMap() {
-          const center = { lat: -34.9285, lng: 138.6007 }; // Default center (Adelaide)
-          const map = new google.maps.Map(document.getElementById('map'), {
+          const center = { lat: -34.9285, lng: 138.6007 }; // Default center
+          map = new google.maps.Map(document.getElementById('map'), {
               zoom: 10,
               center: center,
           });
+  
+          addUserLocation();
+          addAllStationsMarker();
 
-          // Add markers for each station
-          stations.forEach(station => {
-              const position = { lat: parseFloat(station.latitude), lng: parseFloat(station.longitude) };
-              new google.maps.Marker({
-                  position: position,
-                  map: map,
-                  title: station.name,
-              });
+          // Event listener for dropdown selection
+          document.getElementById('station-select').addEventListener('change', function() {
+              const selectedValue = this.value;
+              clearMarkers();
+              addUserLocation();
+              if (selectedValue === "all") {
+                addAllStationsMarker();
+              } else if (selectedValue) {
+                  // Add marker for the selected station
+                  const selectedStation = stations.find(station => station.name === selectedValue);
+                  if (selectedStation) {
+                      const position = {
+                          lat: parseFloat(selectedStation.latitude),
+                          lng: parseFloat(selectedStation.longitude)
+                      };
+                      addMarker(position, selectedStation.name);
+                      map.setCenter(position);
+                  }
+              }
           });
+  
+          // Add markers for all stations
+          function addAllStationsMarker() {
+            stations.forEach(station => {
+                      const position = {
+                          lat: parseFloat(station.latitude),
+                          lng: parseFloat(station.longitude)
+                      };
+                      addMarker(position, station.name);
+                  });
+          }
 
           // Show user's current location
-          if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    const userLocation = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                    };
-
-                    // Add a marker for the user's location
-                    new google.maps.Marker({
-                        position: userLocation,
-                        map: map,
-                        title: 'You are here!',
-                        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-                    });
-
-                    // Center the map on the user's location
-                    map.setCenter(userLocation);
-                }, () => {
-                    handleLocationError(true, map.getCenter());
-                });
-            } else {
-                // Browser doesn't support Geolocation
-                handleLocationError(false, map.getCenter());
+          function addUserLocation() {
+              navigator.geolocation.getCurrentPosition((position) => {
+                  const userLocation = {
+                      lat: position.coords.latitude,
+                      lng: position.coords.longitude,
+                  };
+  
+                  // Add a marker for the user's location
+                  addMarker(userLocation, 'You are here!', 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+  
+                  // Center the map on the user's location
+                  map.setCenter(userLocation);
+              }, () => {
+                  handleLocationError(true, map.getCenter());
+              });
             }
-
+  
           // Click event on the map
           map.addListener('click', (event) => {
               const userLat = event.latLng.lat();
               const userLng = event.latLng.lng();
-
+  
               let nearestStation = null;
               let minDistance = Infinity;
-
+  
               stations.forEach(station => {
                   const stationLat = parseFloat(station.latitude);
                   const stationLng = parseFloat(station.longitude);
@@ -233,19 +258,33 @@
                       new google.maps.LatLng(userLat, userLng),
                       new google.maps.LatLng(stationLat, stationLng)
                   );
-
+  
                   if (distance < minDistance) {
                       minDistance = distance;
                       nearestStation = station;
                   }
               });
-
+  
               if (nearestStation) {
                   alert(`Nearest station: ${nearestStation.name}\nDistance: ${(minDistance / 1000).toFixed(2)} km`);
               }
           });
       }
-
+  
+      function addMarker(position, title, icon = null) {
+          const marker = new google.maps.Marker({
+              position: position,
+              map: map,
+              title: title,
+              icon: icon,
+          });
+          markers.push(marker);
+      }
+  
+      function clearMarkers() {
+          markers.forEach(marker => marker.setMap(null));
+          markers = [];
+      }
+  
       window.onload = initMap;
   </script>
-

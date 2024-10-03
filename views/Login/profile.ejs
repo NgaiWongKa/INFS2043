@@ -141,7 +141,7 @@
                                 <li class="list-group-item">
                                     <strong>Date:</strong> <%= order.orderedAt %> <br>
                                     <strong>Total:</strong> $<%= order.totalAmount.toFixed(2) %> <br>
-                                    <strong>Items:</strong> <%= order.items.map(item => item.itemName).join(', ') %>
+                                    <strong>Items:</strong> <%= order.items.map(item => `${item.itemName} x ${item.quantity}`).join(', ') %>
                                 </li>
                             <% }); %>
                             <% if (orders.length === 0) { %>

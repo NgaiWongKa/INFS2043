@@ -56,7 +56,9 @@ router.post("/", async (req, res) => {
         items: cart.map(cartItem => ({
             item: cartItem.id,
             itemName: cartItem.name,
-            quantity: cartItem.quantity
+            quantity: cartItem.quantity,
+            promo_percentage: cartItem.promo_percentage,
+            price: cartItem.price
         })),
         totalAmount: totalAmount
     });
