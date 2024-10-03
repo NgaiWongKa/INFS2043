@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const MenuItem = require('../model/Items');
+const Station = require("../model/Stations");
 
 // Index - List all menu items
 router.get('/', async (req, res) => {
   const menuItems = await MenuItem.find({});
-  res.render('Menu/index', { menuItems });
+  const stations = await Station.find();
+  res.render('Menu/index', { menuItems, stations });
 });
 
 // Edit - Edit menu item form

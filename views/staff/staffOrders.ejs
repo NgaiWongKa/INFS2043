@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="/CSS/font-awesome.min.css" />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-      <link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">  -->
       <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet"
@@ -36,30 +34,30 @@
     </script>
 </head>
 <body>
-    <!---------NAVBAR---------->
-    <section class="header-container">
-        <div class="header-container-flex-desktop">
-          <div class="Logo-desktop">
-            <a href="/home"><img src="./images/logo.png" alt="" /></a>
-          </div>
-          <div class="menubar-pc">
-            <a class="item" href="/home"><span>Home</span></a>
+        <!---------NAVBAR---------->
+        <section class="header-container">
+            <div class="header-container-flex-desktop">
+              <div class="Logo-desktop">
+                <a href="/home"><img src="/images/logo.png" alt="" /></a>
+              </div>
+              <div class="menubar-pc">
+                <a class="item" href="/home"><span>Home</span></a>
 
-            <% if (!isAuthenticated) { %>
-              <a class="item" href="/login"><span>Login</span></a>
-              <a class="item" href="/register"><span>Register</span></a>
-            <% } else { %>
-              <% if (currentUser.type === 'staff') { %>
-                <a href="/order/staff" class="item">View Pending Orders</a>
-            <% } %>
-              <a class="item" href="/menu"><span>Menu</span></a>
-              <a class="item" href="/profile"><span>Profile</span></a>
-              <a class="item" href="/logout"><span>Log out</span></a>
-              <a class="item" href="/order/pending"><span>Pending</span></a>
-            <% } %>
-            <a class="item" href="/GPS"><span>GPS</span></a>
-          </div>
-      </section>
+                <% if (!isAuthenticated) { %>
+                  <a class="item" href="/login"><span>Login</span></a>
+                  <a class="item" href="/register"><span>Register</span></a>
+                <% } else { %>
+                  <% if (currentUser.type === 'staff') { %>
+                    <a href="/order/staff" class="item">View Pending Orders</a>
+                <% } %>
+                  <a class="item" href="/menu"><span>Menu</span></a>
+                  <a class="item" href="/profile"><span>Profile</span></a>
+                  <a class="item" href="/logout"><span>Log out</span></a>
+                  <a class="item" href="/order/pending"><span>Pending</span></a>
+                <% } %>
+                <a class="item" href="/GPS"><span>GPS</span></a>
+              </div>
+          </section>
 
       <h1 style="margin: 20px;">Pending Orders</h1>
       <div class="table-box">
