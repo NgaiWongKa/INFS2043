@@ -48,6 +48,9 @@ var User = new Schema({
     },
     grade: {
         type: String
+    },
+    securityQuestion: {
+        type: String
     }
 })
 

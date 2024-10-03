@@ -1,4 +1,17 @@
-<!-- // Filename - views/login.ejs
+<!-- 
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
+<form action="/forgot-password" method="POST">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="securityAnswer">Security Answer:</label>
+    <input type="text" id="securityAnswer" name="securityAnswer" required>
+
+    <button type="submit">Submit</button>
+</form>
 
 <h1>login</h1>
 
@@ -62,23 +75,20 @@
     <!-- ! Main -->
     <section class="main-content-login" style="height: 600px;">
       <div class="wrapper">
-          <% if (messages.error.length > 0) { %>
-              <div class="alert alert-danger"><%= messages.error %></div>
-          <% } %>
-          <% if (messages.success.length > 0) { %>
-              <div class="alert alert-success"><%= messages.success %></div>
+          <% if (error) { %>
+              <div class="alert alert-danger"><%= error %></div>
           <% } %>
   
-          <form action="/login" method="POST">
-              <h1>Login</h1>
+          <form action="/forgot-password" method="POST">
+              <h1>Forgot Password</h1>
               <div class="input-box">
-                  <input type="text" name="username" placeholder="Username" required>
+                  <input type="text" name="username" id="username" placeholder="Username" required>
               </div>
               <div class="input-box">
-                  <input type="password" name="password" placeholder="Password" required>
+                  <input type="text" name="securityAnswer" id="securityAnswer" placeholder="In what city were you born?" required>
               </div>
               <div>
-                  <button type="submit" class="btn">Login</button>
+                  <button type="submit" class="btn">Submit</button>
               </div>
               <div class="register-link">
                   <p>Don't have an account?
