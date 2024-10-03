@@ -8,14 +8,17 @@ const crypto = require('crypto');
 module.exports = (userSockets) => {
 router.get("/", (req, res) => {
     if (req.session.cart && req.session.cart.length > 0) {
-        res.render("order/checkout", { cart: req.session.cart });
+        res.render("order/checkout", { cart: req.session.cart, messages:
+        {
+            error: req.flash('error')
+        }
+         });
     } else {
         res.redirect("/menu");
     }
 });
 
 router.post("/", async (req, res) => {
-
     try {
         const paymentMethod = req.body.paymentMethod;
         const cvv = req.body.cvv;
@@ -23,12 +26,20 @@ router.post("/", async (req, res) => {
 
         if (paymentMethod === 'card') {
             if (!user.cardNumber || !user.CVV) {
-                return res.status(400).json({ message: "No saved card information found." });
+                req.flash('error', "No saved card information found");
+                return res.render('order/checkout', { cart: req.session.cart, messages:
+                    {
+                        error: req.flash('error')
+                    } });
             }
-
+    
             const hashedCVV = hashCVV(cvv);
             if (hashedCVV !== user.CVV) {
-                return res.status(400).json({ message: "Invalid CVV." });
+                req.flash('error', "Invalid CVV");
+                return res.render('order/checkout', { cart: req.session.cart, messages:
+                    {
+                        error: req.flash('error')
+                    } });
             }
         }
 
@@ -50,9 +61,25 @@ router.post("/", async (req, res) => {
         totalAmount: totalAmount
     });
 
+
+
     await newOrder.save();
 
     req.session.cart = [];
+
+    user.point += totalAmount; // 1 point per dollar spent
+
+    if (user.point >= 1000) {
+        user.grade = "Platinum Customer";
+    } else if (user.point >= 500) {
+        user.grade = "Gold Customer";
+    } else if (user.point >= 250) {
+        user.grade = "Silver Customer";
+    } else {
+        user.grade = "New Customer";
+    }
+
+    await user.save();
 
     res.redirect("/order/confirmation/" + newOrder._id);
     }   catch (err) {
@@ -63,7 +90,6 @@ router.post("/", async (req, res) => {
 
 router.get("/confirmation/:orderId", async (req, res) => {
     const order = await Order.findById(req.params.orderId).populate("items.item");
-
     res.render("order/confirmation", { order });
 });
 

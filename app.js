@@ -104,6 +104,8 @@ app.post("/register", function (req, res) {
     type: "Customer", 
     dob: new Date(req.body.dob), 
     prefFuel: req.body.prefFuel,
+    point: 0,
+    grade: "New User",
     paymentMethod: req.body.paymentMethod,
     cardNumber: req.body.paymentMethod === 'card' ? req.body.cardNumber : 0,
     expirationMonth: req.body.paymentMethod === 'card' ? req.body.expirationMonth : 0,

@@ -39,4 +39,17 @@ router.get("/", (req, res) => {
     res.render("cart/index", { cart: cart });
 });
 
+router.post("/remove", (req, res) => {
+    const { itemId } = req.body;
+    const cart = req.session.cart || [];
+
+    if (req.session.cart) {
+        const itemIndex = req.session.cart.findIndex(cartItem => cartItem.item.toString() === itemId);
+        req.session.cart.splice(itemIndex, 1);
+    }
+    res.render("cart/index", {cart: cart });
+});
+
+module.exports = router;
+
 module.exports = router;

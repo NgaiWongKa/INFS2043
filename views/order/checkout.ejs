@@ -57,6 +57,12 @@
     <div class="container mt-5 mb-5">
         <div class="text-center">
             <h1>Complete Your Purchase</h1>
+            <% if (messages.error.length > 0) { %>
+                <div class="alert alert-danger" role="alert">
+                    <%= messages.error %>
+                </div>
+                <%
+            } %>
             <a href="/menu" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">Back to shopping?</a>
           </div>
 
@@ -92,7 +98,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <% } %>
                                     <div class="col-5">
                                         <div id="cardDetails" class="mt-4" style="display: none;">
                                             <span class="me-2 text-muted">We accept: </span>
@@ -101,9 +106,10 @@
                                             <span><img src="extra_images/visa.png" width="15%"></span>
                                             <span><img src="extra_images/american-express.png" width="15%"></span>
                                             <label for="cvv" class="form-label mt-3">CVV*:</label>
-                                            <input type="text" id="cvv" name="cvv" class="form-control" placeholder="CVV" maxlength="3" required>
+                                            <input type="text" id="cvv" name="cvv" class="form-control" placeholder="CVV" maxlength="3">
                                         </div>
                                     </div>
+                                    <% } %>
                                 </div>
                                 <!-- <div>
                                     <input type="radio" id="paymentCash" name="paymentMethod" value="cash" checked>
@@ -155,17 +161,19 @@
                             <% } else { %>
                                 <p>Your cart is empty. <a href="/menu">Go back to menu</a></p>
                             <% } %>
-                                <form action="/order" method="POST">
+
                         </div>
     
                         <div class="card-footer d-flex justify-content-between align-items-start">
                             <span class="fw-bold">
                                 Estimated Total: 
                             </span>
-                            <span class="fs-3">$<%= cart.reduce((total, cartItem) => total + (cartItem.price * cartItem.quantity), 0).toFixed(2) %></span>
+                            <span class="fs-3">$<%= cart.reduce((total, cartItem) => total + (cartItem.price - ( cartItem.promo_percentage / 100 * cartItem.price ) * cartItem.quantity), 0).toFixed(2) %></span>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success mt-3">Place Order</button>
+                    <form action="/order" method="POST">
+                        <button type="submit" class="btn btn-success mt-3">Place Order</button>
+                    </form>
                 </div>
             </div>
         </form>

@@ -84,9 +84,10 @@
                   <td><%= cartItem.quantity %></td>
                   <td>$<%= ((cartItem.price - ( (cartItem.promo_percentage) / 100 * cartItem.price)) * cartItem.quantity).toFixed(2) %></td>
                   <td class="text-center">
-                    <!--Remove item from cart button-->
-                    <button type="button" class="btn btn-link link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Remove</button>
-                    <!---->
+                    <form action="/cart/remove" method="POST" style="display:inline;">
+                      <input type="hidden" name="itemId" value="<%= cartItem.item %>">
+                      <button type="submit" class="btn btn-link link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Remove</button>
+                  </form>
                   </td>
                 </tr>
               <% }) %>
@@ -97,7 +98,9 @@
         <div class="text-end">
           <span class="text-muted">Total amount</span> <br />
           <span class="fw-bold fs-4">$<%= cart.reduce((total, cartItem) => total + ((cartItem.price - ((cartItem.promo_percentage) / 100 * cartItem.price)) * cartItem.quantity), 0).toFixed(2) %></span> <br />
+          <% if ( cart.reduce((total, cartItem) => total + ((cartItem.price - ((cartItem.promo_percentage) / 100 * cartItem.price)) * cartItem.quantity), 0).toFixed(2) > 0) { %>
           <a href="/order" class="btn btn-success mt-3">Checkout now</a>
+          <% } %>
         </div>
       </div>
     </div>
