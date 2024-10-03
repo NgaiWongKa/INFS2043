@@ -11,7 +11,9 @@ const OrderSchema = new mongoose.Schema({
             ref: 'MenuItem'  // Reference to the MenuItem model
         },
         itemName: String,
-        quantity: Number
+        quantity: Number,
+        promo_percentage: Number,
+        price: Number
     }],
     totalAmount: Number,
     status: {
