@@ -56,19 +56,76 @@
         <!------------------------>
 
         <!---------MAIN CONTENT---------->
-        <h1>Order Confirmation</h1>
+        <div class="container mt-5 mb-5">
+            <div class="text-center">
+                <h1>Thank you for your order!</h1>
+                <span>You will receive a notification when your order is ready.</span>
+                <a href="/menu" class="fw-bold link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">
+                    Continue shopping?
+                </a>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <div class="bg-white shadow-sm border border-secondary rounded mt-4 mb-4 p-2">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th class="fs-6">ORDER DETAILS - <i>#<%= order._id %></i></th>
+                                    </tr>
+                                </thead>
 
-        <h2>Order #<%= order._id %></h2>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <table class="table table-hover border">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Ordered Item</th>
+                                                        <th>Quantity</th>
+                                                        <th>Cost per item</th>
+                                                        <th>Total</th>
+                                                    </tr>
+                                                </thead>
 
-        <ul>
-            <% order.items.forEach(function(item) { %>
-                <li><%= item.itemName %> - Quantity: <%= item.quantity %></li>
-            <% }); %>
-        </ul>
+                                                <tbody>
+                                                    <% order.items.forEach(function(item) { %>
+                                                        <tr>
+                                                            <td>
+                                                                <%= item.itemName %>
+                                                            </td>
+                                                            <td>
+                                                                <%= item.quantity %>
+                                                            </td>
+                                                            <td>
+                                                                $<%= item.price %>
+                                                            </td>
+                                                            <td>
+                                                                $<%= (item.quantity * item.price).toFixed(2) %>
+                                                            </td>
+                                                        </tr>
+                                                    <% }); %>
+                                                </tbody>
 
-        <p>Total Amount: $<%= order.totalAmount.toFixed(2) %></p>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
 
-        <a href="/menu" class="btn btn-primary">Back to Menu</a>
+                                <tfoot>
+                                    <tr>
+                                        <td>
+                                            <span class="text-muted fs-6">Total Amount: </span>
+                                            <span class="fs-5 fw-bold">$<%= order.totalAmount.toFixed(2) %></span>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!------------------------------->
 
         <!---------FOOTER---------->
