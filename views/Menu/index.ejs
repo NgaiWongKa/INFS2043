@@ -79,7 +79,7 @@
                     <h5 class="card-title">AMPOL</h5>
                     <p class="card-text text-muted">'Proudly fuelling Australia since 1900.'</p>
                     </div>
-                    <button id="chooseButton" type="button" class="card-footer border btn btn-dark">SELECT</button>
+                    <button id="chooseButton" name="station1" type="button" class="card-footer border btn btn-dark">SELECT</button>
                 </div>
                 <div class="card text-center" style="width: 20%;">
                     <img src="extra_images/shell.png" class="card-img-top p-4" alt="...">
@@ -87,7 +87,7 @@
                     <h5 class="card-title">SHELL</h5>
                     <p class="card-text text-muted">'Go Well - Go Shell'.</p>
                     </div>
-                    <button id="chooseButton" type="button" class="card-footer border btn btn-dark">SELECT</button>
+                    <button id="chooseButton" name="station2" type="button" class="card-footer border btn btn-dark">SELECT</button>
                 </div>
                 <div class="card text-center" style="width: 20%;">
                     <img src="extra_images/bp.png" class="card-img-top p-4" alt="...">
@@ -95,7 +95,7 @@
                     <h5 class="card-title">BP</h5>
                     <p class="card-text text-muted">'Alles super' ('Everything's super').</p>
                     </div>
-                    <button id="chooseButton" type="button" class="card-footer border btn btn-dark">SELECT</button>
+                    <button id="chooseButton" name="station3" type="button" class="card-footer border btn btn-dark">SELECT</button>
                 </div>
             </div>
             <!-------------------------->
@@ -108,7 +108,7 @@
                     <h5 class="card-title">CALTEX</h5>
                     <p class="card-text text-muted">'One journey. Almost eighty years in the making.'</p>
                     </div>
-                    <button id="chooseButton" type="button" class="card-footer border btn btn-dark">SELECT</button>
+                    <button id="chooseButton" name="station4" type="button" class="card-footer border btn btn-dark">SELECT</button>
                 </div>
                 <div class="card text-center" style="width: 20%;">
                     <img src="extra_images/mobil.png" class="card-img-top p-4" alt="...">
@@ -116,7 +116,7 @@
                     <h5 class="card-title">MOBIL</h5>
                     <p class="card-text text-muted">'Our energy will take you further.'</p>
                     </div>
-                    <button id="chooseButton" type="button" class="card-footer border btn btn-dark">SELECT</button>
+                    <button id="chooseButton" name="station5" type="button" class="card-footer border btn btn-dark">SELECT</button>
                 </div>
                 <div class="card text-center" style="width: 20%;">
                     <img src="extra_images/united.jpg" class="card-img-top p-4" alt="...">
@@ -124,7 +124,7 @@
                     <h5 class="card-title">UNITED Petroleum</h5>
                     <p class="card-text text-muted">'Our business touches the lives of all Australians.'</p>
                     </div>
-                    <button id="chooseButton" type="button" class="card-footer border btn btn-dark">SELECT</button>
+                    <button id="chooseButton" name="station6" type="button" class="card-footer border btn btn-dark">SELECT</button>
                 </div>
             </div>
             <!-------------------------->
@@ -140,13 +140,13 @@
                             <form id="fuel-form">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Location</span>
-                                    <select id="station" name="station" class="form-control">
-                                        <option value="Station 1" selected>Station 1 (2.5 km) - 15 Elder Smith Road, Mawson Lakes SA 5095</option>
-                                        <option value="Station 2">Station 2 (4.2 km) - 72 Salisbury Highway, Salisbury SA 5108</option>
-                                        <option value="Station 3">Station 3 (4.9 km) - 42 McIntyre Road, Para Hills SA 5096</option>
-                                        <option value="Station 4">Station 4 (5.1 km) - 180 Kings Road, Parafield Gardens SA 5107</option>
-                                        <option value="Station 5">Station 5 (6.0 km) - 600 Main North Road, Pooraka SA 5095</option>
-                                        <option value="Station 6">Station 6 (8.2 km) - 50 Anderson Walk, Smithfield SA 5114</option>
+                                    <select id="station" name="station" class="form-control" disabled>
+                                        <option id="station1" value="Station 1">Station 1 (2.5 km) - 15 Elder Smith Road, Mawson Lakes SA 5095</option>
+                                        <option id="station2" value="Station 2">Station 2 (4.2 km) - 72 Salisbury Highway, Salisbury SA 5108</option>
+                                        <option id="station3" value="Station 3">Station 3 (4.9 km) - 42 McIntyre Road, Para Hills SA 5096</option>
+                                        <option id="station4" value="Station 4">Station 4 (5.1 km) - 180 Kings Road, Parafield Gardens SA 5107</option>
+                                        <option id="station5" value="Station 5">Station 5 (6.0 km) - 600 Main North Road, Pooraka SA 5095</option>
+                                        <option id="station6" value="Station 6">Station 6 (8.2 km) - 50 Anderson Walk, Smithfield SA 5114</option>
                                     </select>
                                 </div>
                                 <div class="input-group mb-3">
@@ -174,47 +174,10 @@
         </div>
         <!-------------------------->
 
-        <!---------FUEL SECTION---------->
-        <!-- <div class="container mt-5">
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h2>Fuel Payment and Pump Reservation</h2>
-                </div>
-                <div class="card-body">
-                    <form id="fuel-form">
-                        <div class="form-group">
-                            <label for="fuelType">Fuel Type:</label>
-                            <select id="fuelType" name="fuelType" class="form-control">
-                                <option value="Ethanol 85" <%= currentUser.prefFuel === 'Ethanol 85' ? 'selected' : '' %>>Ethanol 85</option>
-                                <option value="Diesel" <%= currentUser.prefFuel === 'Diesel' ? 'selected' : '' %>>Diesel</option>
-                                <option value="Premium 95" <%= currentUser.prefFuel === 'Premium 95' ? 'selected' : '' %>>Premium 95</option>
-                                <option value="Unleaded 91" <%= currentUser.prefFuel === 'Unleaded 91' ? 'selected' : '' %>>Unleaded 91</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="amount">Amount (Liters):</label>
-                            <input type="number" id="amount" name="amount" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Pay for Fuel</button>
-                    </form>
-                    <div id="pump-info" class="mt-3"></div>
-                </div>
-            </div>
-        </div> -->
-        <!-------------------------->
-
 <hr />
 
         <!---------FOOD SECTION---------->
         <div class="container mt-4 mb-4">
-            <!-- <div class="img-container mb-3">
-                <img src="/extra_images/food_menu_banner.jpg" class="img-fluid rounded" alt="A food menu's banner image" style="width: 100%; height: 18rem; overflow: hidden;">
-                <div class="overlay">
-                    <span>
-                        <h1 class="mb-4 text-center" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;color: #fff;font-size: 600%; text-shadow: rgb(0, 0, 0) 1px 0 100px;">FOOD MENU</h1>
-                    </span>
-                </div>
-            </div> -->
             <div class="text-center mb-3">
                 <h1>Food Menu</h1>
                 <p class="text-muted">Browse through a variety of items!</p>
@@ -330,6 +293,9 @@
                             }
                         });
                     }
+
+                    var stationIndex = button.getAttribute('name').charAt(button.getAttribute('name').length - 1);
+                    document.querySelector('[name="station"]').selectedIndex = Number(stationIndex) - 1;
                 });
             });
 
