@@ -63,6 +63,7 @@
       </div>
 
       <div class="bg-white shadow-sm rounded border border-secondary mt-3 p-3">
+        <% if ( cart.reduce((total, cartItem) => total + ((cartItem.price - ((cartItem.promo_percentage) / 100 * cartItem.price)) * cartItem.quantity), 0).toFixed(2) > 0) { %>
         <div class="table-responsive">
           <table class="table table-hover border fs-6">
             <thead class="table-dark">
@@ -102,6 +103,11 @@
           <a href="/order" class="btn btn-success mt-3">Checkout now</a>
           <% } %>
         </div>
+        <% } else { %>
+          <p class="text-center fs-6">
+            Your cart is currently empty. Try <a href="/menu">adding some items</a>.
+          </p>
+        <% } %>
       </div>
     </div>
 
