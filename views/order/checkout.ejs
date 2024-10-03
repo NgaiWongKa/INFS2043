@@ -70,7 +70,7 @@
             <div class="row">
                 <div class="col-8">
                     <div class="d-grid">
-                        <div class="justify-content-center m-3 p-5 bg-white border border-secondary shadow-sm rounded gap-1">
+                        <div class="justify-content-center m-3 p-4 ps-5 bg-white border border-secondary shadow-sm rounded gap-1">
                                 <h5 class="fw-bold" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">CHOOSE YOUR PAYMENT METHOD</h5>
                                 <div class="row mt-3">
                                     <div class="col-6">
@@ -109,6 +109,10 @@
                                             <input type="text" id="cvv" name="cvv" class="form-control" placeholder="CVV" maxlength="3">
                                         </div>
                                     </div>
+                                    <% } else { %>
+                                    <p class="mt-3 text-muted">
+                                        Want to pay by card? <a href="/profile">Go to your profile</a> to add your card details.
+                                    </p>
                                     <% } %>
                                 </div>
                                 <!-- <div>
