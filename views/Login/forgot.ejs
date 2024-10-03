@@ -1,0 +1,16 @@
+<!-- forgot-password.ejs -->
+<% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+<% } %>
+
+<form action="/forgot-password" method="POST">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="securityAnswer">Security Answer:</label>
+    <input type="text" id="securityAnswer" name="securityAnswer" required>
+
+    <button type="submit">Submit</button>
+
+    <!-- Display error message if there is one -->
+</form>

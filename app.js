@@ -244,6 +244,39 @@ function hashCVV(cvv) {
   return hash.digest('hex');
 }
 
+app.get('/forgot', (req,res) => {
+  res.render('Login/forgot', {error: ""});
+})
+
+app.post('/forgot-password', async (req, res) => {
+  const { username, securityAnswer } = req.body;
+
+  try {
+      const user = await User.findOne({ username: username });
+      if (user && user.securityQuestion === securityAnswer) {
+          res.render(`Login/reset`, {userId: user._id});
+      } else {
+          res.render('Login/forgot', { error: 'Invalid username or security answer.' });
+      }
+  } catch (err) {
+      res.status(500).json({ message: 'An error occurred.' });
+  }
+});
+
+app.get('/reset-password', (req,res) => {
+  res.render('Login/reset', req.userId)
+});
+
+app.post('/reset-password/:userId', async (req, res) => {
+  const userId = req.params.userId;
+  const password = req.body.password;
+  const user = await User.findById(userId);
+  await user.setPassword(password);
+  await user.save();
+  req.flash('Success', 'You have successfully changed your password');
+  return res.redirect('/login');
+});
+
 app.get('/GPS', async (req, res) => {
   const stations = await Station.find();
   res.render('Login/GPS', { stations });
