@@ -65,7 +65,7 @@ router.post("/", async (req, res) => {
 
     await newOrder.save();
 
-    req.session.cart = [];
+    
 
     user.point += totalAmount; // 1 point per dollar spent
 
@@ -89,8 +89,10 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/confirmation/:orderId", async (req, res) => {
+    cart = req.session.cart;
+    req.session.cart = [];
     const order = await Order.findById(req.params.orderId).populate("items.item");
-    res.render("order/confirmation", { order });
+    res.render("order/confirmation", { order, cart });
 });
 
 router.get("/staff", isAuthenticated, async (req, res) => {

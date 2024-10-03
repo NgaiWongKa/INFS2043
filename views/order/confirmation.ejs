@@ -84,24 +84,28 @@
                                                         <th>Ordered Item</th>
                                                         <th>Quantity</th>
                                                         <th>Cost per item</th>
+                                                        <th>Discount</th>
                                                         <th>Total</th>
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
-                                                    <% order.items.forEach(function(item) { %>
+                                                    <% cart.forEach(function(item) { %>
                                                         <tr>
                                                             <td>
-                                                                <%= item.itemName %>
+                                                                <%= item.name %>
                                                             </td>
                                                             <td>
                                                                 <%= item.quantity %>
                                                             </td>
                                                             <td>
-                                                                $<%= item.price %>
+                                                                $<%= item.price %> 
                                                             </td>
                                                             <td>
-                                                                $<%= (item.quantity * item.price).toFixed(2) %>
+                                                                %<%= item.promo_percentage %> 
+                                                            </td>
+                                                            <td>
+                                                                $<%= ((item.price - (item.promo_percentage / 100 * item.price)) * item.quantity).toFixed(2) %>
                                                             </td>
                                                         </tr>
                                                     <% }); %>
