@@ -56,42 +56,46 @@
       </section>
 
     <h1 style="margin: 20px;">Pending Orders</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>User</th>
-                <th>Items</th>
-                <th>Total Amount</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% orders.forEach(order => { %>
-                <tr>
-                    <td><%= order._id %></td>
-                    <td><%= order.user.username %></td>
-                    <td>
-                        <ul>
-                            <% order.items.forEach(item => { %>
-                                <li>
-                                    <%= item.itemName %> (Quantity: <%= item.quantity %>)
-                                </li>
-                            <% }) %>
-                        </ul>
-                    </td>
-                    <td><%= order.totalAmount %></td>
-                    <td><%= order.status %></td>
-                    <td>
-                        <form action="/order/ready/<%= order._id %>" method="POST">
-                            <button type="submit">Mark as Ready</button>
-                        </form>
-                    </td>
-                </tr>
-            <% }) %>
-        </tbody>
-    </table>
+    <div class="orders-container">
+        <% orders.forEach(order => { %>
+            <div class="order-box">
+                <table style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>User</th>
+                            <th>Items</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><%= order._id %></td>
+                            <td><%= order.user.username %></td>
+                            <td>
+                                <ul>
+                                    <% order.items.forEach(item => { %>
+                                        <li>
+                                            <%= item.itemName %> (Quantity: <%= item.quantity %>)
+                                        </li>
+                                    <% }) %>
+                                </ul>
+                            </td>
+                            <td><%= order.totalAmount %></td>
+                            <td><%= order.status %></td>
+                            <td>
+                                <form action="/order/ready/<%= order._id %>" method="POST">
+                                    <button type="submit">Mark as Ready</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        <% }) %>
+    </div>
 
           <!---------FOOTER---------->
           <section class="footer-container">
