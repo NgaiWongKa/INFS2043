@@ -55,47 +55,47 @@
           </div>
       </section>
 
-    <h1 style="margin: 20px;">Pending Orders</h1>
-    <div class="orders-container">
-        <% orders.forEach(order => { %>
-            <div class="order-box">
-                <table style="width: 100%;">
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>User</th>
-                            <th>Items</th>
-                            <th>Total Amount</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><%= order._id %></td>
-                            <td><%= order.user.username %></td>
-                            <td>
-                                <ul>
-                                    <% order.items.forEach(item => { %>
-                                        <li>
-                                            <%= item.itemName %> (Quantity: <%= item.quantity %>)
-                                        </li>
-                                    <% }) %>
-                                </ul>
-                            </td>
-                            <td><%= order.totalAmount %></td>
-                            <td><%= order.status %></td>
-                            <td>
-                                <form action="/order/ready/<%= order._id %>" method="POST">
-                                    <button type="submit">Mark as Ready</button>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        <% }) %>
-    </div>
+      <h1 style="margin: 20px;">Pending Orders</h1>
+      <div class="table-box">
+          <div class="orders-container">
+              <table style="width: 100%;">
+                  <thead>
+                      <tr>
+                          <th>Order ID</th>
+                          <th>User</th>
+                          <th>Items</th>
+                          <th>Total Amount</th>
+                          <th>Status</th>
+                          <th>Actions</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <% orders.forEach(order => { %>
+                          <tr>
+                              <td><%= order._id %></td>
+                              <td><%= order.user.username %></td>
+                              <td>
+                                  <ul>
+                                      <% order.items.forEach(item => { %>
+                                          <li>
+                                              <%= item.itemName %> (Quantity: <%= item.quantity %>)
+                                          </li>
+                                      <% }) %>
+                                  </ul>
+                              </td>
+                              <td><%= order.totalAmount %></td>
+                              <td><%= order.status %></td>
+                              <td>
+                                  <form action="/order/ready/<%= order._id %>" method="POST">
+                                      <button type="submit">Mark as Ready</button>
+                                  </form>
+                              </td>
+                          </tr>
+                      <% }) %>
+                  </tbody>
+              </table>
+          </div>
+      </div>
 
           <!---------FOOTER---------->
           <section class="footer-container">
@@ -126,7 +126,7 @@
                 <div class="footer-item-content">
                   <a href="callto:+1 800 603 6035">+61 47 369 6999</a><br />
                   <a href="callto:+1 800 603 6035">+61 47 369 6969</a><br />
-                  <a href="mailto:mail@demolink.org">UTRmail@demolink.org</a>
+                  <a href="mailto:mail@demolink.org">UTRMail@demolink.org</a>
                 </div>
               </div>
             </div>
