@@ -212,15 +212,15 @@
                                     <span class="input-group-text">Quantity</span>
                                     <input type="number" name="quantity" class="form-control" style="width: 20%;" value="1" min="1">
                                 </div>
-                                <div class="d-grid col-8 mx-auto">
-                                    <button type="submit" class="btn btn-success mt-3">Add to Cart</button>
+                                <div class="d-grid col-12 mx-auto">
+                                    <button type="submit" class="btn btn-dark mt-3">Add to Cart</button>
                                 </div>
                             </form>
                             <% if (currentUser.type == "staff") { %>
-                                <div class="d-grid col-8 mx-auto">
+                                <div class="d-grid col-12 mx-auto">
                                     <a href="/menu/<%= item._id %>/edit" class="btn btn-outline-warning mt-2">Edit</a>
                                 </div>
-                                <form action="/menu/<%= item._id %>?_method=DELETE" method="POST" class="d-grid col-8 mx-auto">
+                                <form action="/menu/<%= item._id %>?_method=DELETE" method="POST" class="d-grid col-12 mx-auto">
                                     <button type="submit" class="btn btn-outline-danger mt-2">Delete</button>
                                 </form>
                             <% } %>
