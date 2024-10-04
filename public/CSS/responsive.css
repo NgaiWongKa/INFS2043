@@ -1,0 +1,117 @@
+/* Mobile: width < 740px */
+@media only screen and (max-width: 739px) {
+    /* --------NAVBAR-------- */
+    .header-container-flex-desktop {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .menubar-pc {
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 10px 0;
+    }
+  
+    .menubar-pc a {
+      font-size: 14px;
+      margin: 5px;
+    }
+  
+    /* --------Slideshow-------- */
+    .slideshow h5 {
+      font-size: 24px;
+    }
+  
+    .slideshow p {
+      font-size: 12px;
+    }
+  
+    /* Slide buttons */
+    .prev,
+    .next {
+      font-size: 20px;
+    }
+  
+    /* --------FOOTER-------- */
+    .footer-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  
+    .footer-item {
+      padding: 10px;
+    }
+  }
+
+  /* Tablet: width >= 740px and width < 1024px */
+@media only screen and (min-width: 740px) and (max-width: 1023px) {
+    /* --------NAVBAR-------- */
+    .header-container-flex-desktop {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  
+    .menubar-pc {
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      margin: 10px 0;
+    }
+  
+    .menubar-pc a {
+      font-size: 16px;
+      margin: 10px;
+    }
+  
+    /* --------Slideshow-------- */
+    .slideshow h5 {
+      font-size: 36px;
+    }
+  
+    .slideshow p {
+      font-size: 14px;
+    }
+  
+    /* --------FOOTER-------- */
+    .footer-content {
+      grid-template-columns: repeat(2, 1fr);
+      text-align: center;
+    }
+  
+    .footer-item {
+      padding: 15px;
+    }
+  }
+
+/* Desktop: width >= 1024px */
+@media only screen and (min-width: 1024px) {
+    /* --------NAVBAR-------- */
+    .header-container-flex-desktop {
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    .menubar-pc a {
+      font-size: 18px;
+      margin: 0 20px;
+    }
+  
+    /* --------Slideshow-------- */
+    .slideshow h5 {
+      font-size: 60px;
+    }
+  
+    .slideshow p {
+      font-size: 18px;
+    }
+  
+    /* --------FOOTER-------- */
+    .footer-content {
+      grid-template-columns: repeat(3, 1fr);
+      text-align: left;
+    }
+  
+    .footer-item {
+      padding: 20px;
+    }
+  }
+  
