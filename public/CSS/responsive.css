@@ -107,7 +107,7 @@
     /* --------FOOTER-------- */
     .footer-content {
       grid-template-columns: repeat(3, 1fr);
-      text-align: left;
+      text-align: center;
     }
   
     .footer-item {
