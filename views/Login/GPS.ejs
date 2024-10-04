@@ -116,6 +116,7 @@
                   <p>Distance: ${station.distance.toFixed(2)} km</p>
                 `;
                 listContainer.appendChild(item);
+                updateDropdownWithDistances();
               });
             });
           </script>
@@ -270,6 +271,19 @@
           markers.forEach(marker => marker.setMap(null));
           markers = [];
       }
+
+      function updateDropdownWithDistances() {
+        const dropdown = document.getElementById('station-select');
+        dropdown.innerHTML = '<option value="all" selected>All Stations</option>';
+
+        stations.forEach(station => {
+            const option = document.createElement('option');
+            option.value = station.name;
+            option.textContent = `${station.name} (${station.distance.toFixed(2)} km)`;
+            dropdown.appendChild(option);
+        });
+    }
+
   
       window.onload = initMap;
   </script>
